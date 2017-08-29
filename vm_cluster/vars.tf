@@ -74,3 +74,15 @@ variable "vm_image_version" {
 # ---------------------------------------------------------------------------------------------------------------------
 variable "os_admin_username" {}
 variable "os_admin_password" {}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# VARIABLE-DEFINITION FOR SHARED STORAGE
+# ---------------------------------------------------------------------------------------------------------------------
+variable "storage" {
+    default = false
+    description = "initialize shared file storage on all nodes"
+}
+variable "storage_share_clusterdata" {
+    description = "Share to mount into nodes for cluster data"
+    default     = "cluster_data"
+    }
