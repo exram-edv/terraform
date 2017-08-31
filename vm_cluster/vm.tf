@@ -6,7 +6,7 @@ resource "azurerm_availability_set" "as" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                          = "${azurerm_resource_group.rg.name}_node${count.index}_vm"
+  name                          = "${azurerm_resource_group.rg.name}_node${count.index}"
   location                      = "${var.deployment_region}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
   availability_set_id           = "${azurerm_availability_set.as.id}"
