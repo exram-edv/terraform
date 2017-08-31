@@ -19,6 +19,7 @@ resource "null_resource" "cluster" {
         connection {
             type        = "ssh"
             host        = "${element(var.cluster_node_public_ips, count.index)}"
+            port        = "22${var.cluster_is_lb == 0 ? "" : format(%03d, count.index)}"
             user        = "${var.os_admin_username}"
             password    = "${var.os_admin_password}"
         }
@@ -35,6 +36,7 @@ resource "null_resource" "cluster" {
         connection {
             type        = "ssh"
             host        = "${element(var.cluster_node_public_ips, count.index)}"
+            port        = "22${var.cluster_is_lb == 0 ? "" : format(%03d, count.index)}"
             user        = "${var.os_admin_username}"
             password    = "${var.os_admin_password}"
         }
