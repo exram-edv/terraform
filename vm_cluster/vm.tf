@@ -39,7 +39,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   provisioner "file" {
-    source = "${path.cwd}/provisioning/provision.sh"
+    source = "${path.module}/provisioning/provision.sh"
     destination = "/home/${var.os_admin_username}/provision.sh"
 
     connection {
@@ -55,7 +55,7 @@ resource "azurerm_virtual_machine" "vm" {
       "sudo apt-get -y install dos2unix",
       "sudo dos2unix /home/${var.os_admin_username}/provision.sh",
       "chmod +x /home/${var.os_admin_username}/provision.sh",
-      "/home/${var.os_admin_username}/provision.sh"
+      "/home/${var.os_admin_username}/provision.sh ${azurerm_storage_account.storage.name} ${azurerm_storage_account.storage.primary_access_key} ${var.storage_share_clusterdata}",
     ]
 
     connection {
