@@ -23,10 +23,12 @@ variable "os_admin_password" {}
 # ---------------------------------------------------------------------------------------------------------------------
 variable "cluster_node_ids" {
     type = "list"
+    default = []
     description = "list of vm-id´s for cluster nodes"
 }
 variable "cluster_node_public_ips" {
     type = "list"
+    default = []
     description = "list of public-ip´s for cluster nodes"
 }
 variable "cluster_node_ssh_ports" {
