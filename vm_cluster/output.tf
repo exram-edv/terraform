@@ -1,3 +1,7 @@
+output "rg_name" {
+    value = "${azurerm_resource_group.rg.name}"
+}
+
 output "node_names" {
     value = ["${azurerm_virtual_machine.vm.*.name}"]
 }
