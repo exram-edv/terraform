@@ -13,7 +13,7 @@ resource "null_resource" "cluster" {
     }
 
     provisioner "file" {
-        source = "${provision_script_path}/${var.provision_script_file}"
+        source = "${var.provision_script_path}/${var.provision_script_file}"
         destination = "/home/${var.os_admin_username}/${var.provision_script_file}"
 
         connection {
