@@ -88,9 +88,9 @@ variable "storage_share_clusterdata" {
 # ---------------------------------------------------------------------------------------------------------------------
 variable "provision_script_path" {
     default = ""
-    description = "Path to the provisioning script"
+    description = "Path to the additional provisioning script"
 }
 variable "provision_script_file" {
     default = "provision.sh"
-    description = "Filename for provisioning script"
+    description = "Filename for additional provisioning script"
 }

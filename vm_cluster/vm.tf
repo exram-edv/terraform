@@ -39,8 +39,8 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   provisioner "file" {
-    source = "${var.provision_script_path == "" ? $path.module : $var.provision_script_path}/${var.provision_script_file}"
-    destination = "/home/${var.os_admin_username}/${var.provision_script_file}"
+    source = "${path.module}/provisioning/provision.sh"
+    destination = "/home/${var.os_admin_username}/provision.sh"
 
     connection {
       type        = "ssh"
@@ -53,9 +53,9 @@ resource "azurerm_virtual_machine" "vm" {
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y install dos2unix",
-      "sudo dos2unix /home/${var.os_admin_username}/${var.provision_script_file}",
-      "chmod +x /home/${var.os_admin_username}/${var.provision_script_file}",
-      "/home/${var.os_admin_username}/${var.provision_script_file} ${azurerm_storage_account.storage.name} ${azurerm_storage_account.storage.primary_access_key} ${var.storage_share_clusterdata}",
+      "sudo dos2unix /home/${var.os_admin_username}/provision.sh",
+      "chmod +x /home/${var.os_admin_username}/provision.sh",
+      "/home/${var.os_admin_username}/provision.sh ${azurerm_storage_account.storage.name} ${azurerm_storage_account.storage.primary_access_key} ${var.storage_share_clusterdata}",
     ]
 
     connection {
