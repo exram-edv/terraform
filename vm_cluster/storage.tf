@@ -12,7 +12,7 @@ resource "azurerm_storage_account" "storage" {
 * create fileshares 
 *******************************************************************************************/
 resource "azurerm_storage_share" "clusterdata" {
-  name                 = "${var.storage_clusterdata}"
+  name                 = "${var.storage_share_clusterdata}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
   storage_account_name = "${azurerm_storage_account.storage.name}"
 }

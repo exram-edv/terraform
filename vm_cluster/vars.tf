@@ -80,5 +80,5 @@ variable "os_admin_password" {}
 # ---------------------------------------------------------------------------------------------------------------------
 variable "storage_share_clusterdata" {
     description = "Share to mount into nodes for cluster data"
-    default     = "cluster_data"
+    default     = "clusterdata"
     }
