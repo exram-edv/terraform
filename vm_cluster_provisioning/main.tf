@@ -29,7 +29,7 @@ resource "null_resource" "cluster" {
             "sudo apt-get -y install dos2unix",
             "sudo dos2unix /home/${var.os_admin_username}/${var.provision_script_file}",
             "chmod +x /home/${var.os_admin_username}/${var.provision_script_file}",
-            "/home/${var.os_admin_username}/${var.provision_script_file}" "${count.index}"
+            "/home/${var.os_admin_username}/${var.provision_script_file} ${count.index}",
         ]
 
         connection {
