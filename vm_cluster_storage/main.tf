@@ -21,7 +21,7 @@ resource "azurerm_storage_share" "clusterdata" {
 * read template for mount script, add storage account data and save script as mount.sh 
 *******************************************************************************************/
 data "template_file" "mount" {
-  template = "${file("${path.module}/mount.tpl")}"
+  template = "${file("${path.module}/provisioning/mount.tpl")}"
 
   vars {
     storage_account = "${azurerm_storage_account.storage.name}"  
