@@ -1,19 +1,11 @@
 # ---------------------------------------------------------------------------------------------------------------------
-# VARIABLE-DEFINITION FOR AZURE ACCOUNT
-# ---------------------------------------------------------------------------------------------------------------------
-variable "provider_azurerm_subscription_id" {}
-variable "provider_azurerm_client_id" {}
-variable "provider_azurerm_client_secret" {}
-variable "provider_azurerm_tenant_id" {}
-
-# ---------------------------------------------------------------------------------------------------------------------
 # VARIABLE-DEFINITION FOR OS
 # ---------------------------------------------------------------------------------------------------------------------
 variable "os_admin_username" {}
 variable "os_admin_password" {}
 
 # ---------------------------------------------------------------------------------------------------------------------
-# VARIABLE-DEFINITION FOR PROVISIONING
+# VARIABLE-DEFINITION FOR CLUSTER
 # ---------------------------------------------------------------------------------------------------------------------
 variable "cluster_node_ids" {
     type = "list"
@@ -28,11 +20,10 @@ variable "cluster_node_ssh_ports" {
     default = ["22"]
     description = "list of ssh-ports for nodes"
 }
-variable "cluster_is_lb" {
-    default = false
-    description = "set to true if the cluster is loadbalanced"
-}
 
+# ---------------------------------------------------------------------------------------------------------------------
+# VARIABLE-DEFINITION FOR PROVISIONING
+# ---------------------------------------------------------------------------------------------------------------------
 variable "provision_script_path" {
     default = ""
     description = "Path to the additional provisioning script"

@@ -1,9 +1,3 @@
-provider "azurerm" {
-  subscription_id = "${var.provider_azurerm_subscription_id}"
-  client_id       = "${var.provider_azurerm_client_id}"
-  client_secret   = "${var.provider_azurerm_client_secret}"
-  tenant_id       = "${var.provider_azurerm_tenant_id}"
-}
 
 resource "null_resource" "cluster" {
     count = "${length(var.cluster_node_ids)}"

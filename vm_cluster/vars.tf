@@ -1,12 +1,4 @@
 # ---------------------------------------------------------------------------------------------------------------------
-# VARIABLE-DEFINITION FOR AZURE ACCOUNT
-# ---------------------------------------------------------------------------------------------------------------------
-variable "provider_azurerm_subscription_id" {}
-variable "provider_azurerm_client_id" {}
-variable "provider_azurerm_client_secret" {}
-variable "provider_azurerm_tenant_id" {}
-
-# ---------------------------------------------------------------------------------------------------------------------
 # VARIABLE-DEFINITION FOR DEPLOYMENT SETTINGS 
 # ---------------------------------------------------------------------------------------------------------------------
 variable "deployment_region" {
