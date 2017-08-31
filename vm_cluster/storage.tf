@@ -2,7 +2,7 @@
 * add storage account
 *******************************************************************************************/
 resource "azurerm_storage_account" "storage" {
-  name                = "exram-${var.deployment_cluster_name}"
+  name                = "exram${var.deployment_cluster_name}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   location            = "${var.deployment_region}"
   account_type        = "Standard_LRS"
