@@ -35,5 +35,3 @@ variable "provision_script_file" {
     description = "Filename for additional provisioning script"
 }
 
-
-variable depends_on { default = [], type = "list"}

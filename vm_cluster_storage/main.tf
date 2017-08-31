@@ -38,17 +38,41 @@ resource "local_file" "mount" {
 /*******************************************************************************************
 * Provision shared storage to each node with mount.sh
 *******************************************************************************************/
- module "storage_provisioning" {
-    source = "github.com/exram-edv/terraform//vm_cluster_provisioning"
-
+resource "null_resource" "cluster_storage" {
+    count = "${length(var.cluster_node_ids)}"
     depends_on = ["local_file.mount"]
 
-    cluster_node_ids        = "${var.cluster_node_ids}"
-    cluster_node_public_ips = "${var.cluster_node_public_ips}"
+    triggers {
+        node_ids ="${element(var.cluster_node_ids, count.index)}"
+    }
 
-    provision_script_path = "${path.cwd}/provisioning"
-    provision_script_file = "mount.sh"
+    provisioner "file" {
+        source = "${path.cwd}/provisioning/mount.sh"
+        destination = "/home/${var.os_admin_username}/mount.sh"
 
-    os_admin_username = "${var.os_admin_username}"
-    os_admin_password = "${var.os_admin_password}"
- }
+        connection {
+            type        = "ssh"
+            host        = "${element(var.cluster_node_public_ips, count.index)}"
+            port        = "${element(var.cluster_node_ssh_ports, count.index)}"
+            user        = "${var.os_admin_username}"
+            password    = "${var.os_admin_password}"
+        }
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "sudo apt-get -y install dos2unix",
+            "sudo dos2unix /home/${var.os_admin_username}/mount.sh",
+            "chmod +x /home/${var.os_admin_username}/mount.sh",
+            "/home/${var.os_admin_username}/mount.sh",
+        ]
+
+        connection {
+            type        = "ssh"
+            host        = "${element(var.cluster_node_public_ips, count.index)}"
+            port        = "${element(var.cluster_node_ssh_ports, count.index)}"
+            user        = "${var.os_admin_username}"
+            password    = "${var.os_admin_password}"
+        }
+    }
+}
