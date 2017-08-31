@@ -8,6 +8,9 @@ variable "deployment_region" {
 variable "deployment_cluster_name" {
     description = "name of the cluster"
     }
+variable "deployment_rg_name" {
+    description = "name of the resource group"
+}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # VARIABLE-DEFINITION FOR OS
@@ -31,6 +34,7 @@ variable "cluster_node_ssh_ports" {
     default = ["22"]
     description = "list of ssh-ports for nodes"
 }
+
 
 # ---------------------------------------------------------------------------------------------------------------------
 # VARIABLE-DEFINITION FOR SHARED STORAGE

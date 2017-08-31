@@ -3,7 +3,7 @@
 *******************************************************************************************/
 resource "azurerm_storage_account" "storage" {
   name                = "exram${var.deployment_cluster_name}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  resource_group_name = "${var.deployment_rg_name}"
   location            = "${var.deployment_region}"
   account_type        = "Standard_LRS"
 }
@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "storage" {
 *******************************************************************************************/
 resource "azurerm_storage_share" "clusterdata" {
   name                 = "${var.storage_share_clusterdata}"
-  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  resource_group_name  = "${var.deployment_rg_name}"
   storage_account_name = "${azurerm_storage_account.storage.name}"
 }
 
@@ -31,7 +31,7 @@ data "template_file" "mount" {
 }
 
 resource "local_file" "mount" {
-    content  = "${template_file.mount.rendered}"
+    content  = "${data.template_file.mount.rendered}"
     filename = "${path.cwd}/provisioning/mount.sh"
 }
 
