@@ -82,3 +82,15 @@ variable "storage_share_clusterdata" {
     description = "Share to mount into nodes for cluster data"
     default     = "clusterdata"
     }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# VARIABLE-DEFINITION FOR PROVISIONING
+# ---------------------------------------------------------------------------------------------------------------------
+variable "provision_script_path" {
+    default = ""
+    description = "Path to the provisioning script"
+}
+variable "provision_script_file" {
+    default = "provision.sh"
+    description = "Filename for provisioning script"
+}
