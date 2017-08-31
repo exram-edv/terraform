@@ -36,7 +36,7 @@ resource "null_resource" "cluster" {
             type        = "ssh"
             host        = "${element(var.cluster_node_public_ips, count.index)}"
             user        = "${var.os_admin_username}"
-            password    = "${var.os_admin_passpord}"
+            password    = "${var.os_admin_password}"
         }
     }
 }
