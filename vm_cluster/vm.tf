@@ -6,6 +6,8 @@ resource "azurerm_availability_set" "as" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
+  count = "${var.deployment_cluster_node_count}"
+  
   name                          = "${azurerm_resource_group.rg.name}_node${count.index}"
   location                      = "${var.deployment_region}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
@@ -37,34 +39,4 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-
-  provisioner "file" {
-    source = "${path.module}/provisioning/provision.sh"
-    destination = "/home/${var.os_admin_username}/provision.sh"
-
-    connection {
-      type        = "ssh"
-      host        = "${element(azurerm_public_ip.public_ip.*.ip_address, count.index)}"
-      user        = "${var.os_admin_username}"
-      password    = "${var.os_admin_password}"
-    }
-  }
-    
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get -y install dos2unix",
-      "sudo dos2unix /home/${var.os_admin_username}/provision.sh",
-      "chmod +x /home/${var.os_admin_username}/provision.sh",
-      "/home/${var.os_admin_username}/provision.sh ${azurerm_storage_account.storage.name} ${azurerm_storage_account.storage.primary_access_key} ${var.storage_share_clusterdata}",
-    ]
-
-    connection {
-      type        = "ssh"
-      host        = "${element(azurerm_public_ip.public_ip.*.ip_address, count.index)}"
-      user        = "${var.os_admin_username}"
-      password    = "${var.os_admin_password}"
-    }
-  }
-
-  count = "${var.deployment_cluster_node_count}"
 }
