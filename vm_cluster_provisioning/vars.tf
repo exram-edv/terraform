@@ -23,6 +23,11 @@ variable "cluster_node_public_ips" {
     type = "list"
     description = "list of public-ip´s for cluster nodes"
 }
+variable "cluster_node_ssh_ports" {
+    type = "list"
+    default = ["22"]
+    description = "list of ssh-ports for nodes"
+}
 variable "cluster_is_lb" {
     default = false
     description = "set to true if the cluster is loadbalanced"
