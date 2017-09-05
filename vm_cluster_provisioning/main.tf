@@ -1,6 +1,6 @@
 
 resource "null_resource" "cluster" {
-    count = "${length(var.cluster_node_ids)}"
+    count = "${var.cluster_node_count}"
 
     triggers {
         node_ids ="${element(var.cluster_node_ids, count.index)}"

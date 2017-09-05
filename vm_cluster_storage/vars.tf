@@ -36,7 +36,10 @@ variable "cluster_node_ssh_ports" {
     default = ["22"]
     description = "list of ssh-ports for nodes"
 }
-
+variable "cluster_node_count" {
+    default = 1
+    description = "number of nodes in the cluster"
+}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # VARIABLE-DEFINITION FOR SHARED STORAGE

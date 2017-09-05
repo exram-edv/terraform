@@ -39,7 +39,7 @@ resource "local_file" "mount" {
 * Provision shared storage to each node with mount.sh
 *******************************************************************************************/
 resource "null_resource" "cluster_storage" {
-    count = "${length(var.cluster_node_ids)}"
+    count = "${var.cluster_node_count}"
     depends_on = ["local_file.mount"]
 
     triggers {
