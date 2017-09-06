@@ -13,3 +13,7 @@ output "node_ids" {
 output "node_public_ips" {
     value = ["${azurerm_public_ip.public_ip.*.ip_address}"]
 }
+
+output "firewall_name" {
+    value = "${azurerm_network_security_group.firewall.name}"
+}
