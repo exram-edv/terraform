@@ -1,7 +1,8 @@
 ## Terraform Module: vm_cluster_storage
 
-Das Modul fügt Shared-Storage zu allen Cluster-Nodes hinzu. Hierzu wird ein Fileshare auf einem Azure Storage angelegt. 
-Wenn kein Daten für einen bestehenden Storage Accoujnt angegeben werden, wird in der Ressourcegruppe des Clusters ein neuer Account angelegt und die Accountdaten als Output des Moduls zurückgegeben.
+Das Modul fügt Shared-Storage zu allen Cluster-Nodes hinzu. Hierzu wird ein Fileshare auf einem Azure Storage angelegt. Wenn kein Daten für einen bestehenden Storage Account angegeben werden, wird in der Ressourcegruppe des Clusters ein neuer Account angelegt und die Accountdaten als Output des Moduls zurückgegeben.
+
+Nachdem die Dateifreigabe angelegt wurde, wird diese im Verzeichnis /mnt/<storage_share> auf jedem Node des Clusters gemoutet.
 
 ### Variablen
 
