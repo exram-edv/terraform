@@ -31,6 +31,11 @@ variable "cluster_node_public_ips" {
     default = []
     description = "list of public-ip´s for cluster nodes"
 }
+variable "cluster_node_ssh_ports" {
+    type = "list"
+    default = ["22"]
+    description = "list of ssh-ports for nodes"
+}
 variable "cluster_node_count" {
     default = 1
     description = "number of nodes in the cluster"
@@ -39,16 +44,8 @@ variable "cluster_node_count" {
 # ---------------------------------------------------------------------------------------------------------------------
 # VARIABLE-DEFINITION FOR SHARED STORAGE
 # ---------------------------------------------------------------------------------------------------------------------
-variable "storage_share" {
+variable "storage_share_clusterdata" {
     description = "Share to mount into nodes for cluster data"
     default     = "clusterdata"
     }
-variable "storage_account" {
-    default = ""
-    description = "Storage-Account to use for the share"
-}
-variable "storage_key" {
-    default = ""
-    description = "Key for accessing the storage account"
-}
 
