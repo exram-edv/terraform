@@ -1,20 +1,22 @@
 /*******************************************************************************************
-* add storage account
+* neuen Storage account anlegen, wenn keine Daten für einen bestehenden Account angegeben wurden 
 *******************************************************************************************/
 resource "azurerm_storage_account" "storage" {
-  name                = "exram${var.deployment_cluster_name}"
-  resource_group_name = "${var.deployment_rg_name}"
-  location            = "${var.deployment_region}"
-  account_type        = "Standard_LRS"
+    count = "${var.storage_account == "" ? 1 : 0}"
+
+    name                = "exram${var.deployment_cluster_name}"
+    resource_group_name = "${var.deployment_rg_name}"
+    location            = "${var.deployment_region}"
+    account_type        = "Standard_LRS"
 }
 
 /*******************************************************************************************
-* create fileshares 
+* fileshare für shared storage anlegen
 *******************************************************************************************/
 resource "azurerm_storage_share" "clusterdata" {
-  name                 = "${var.storage_share_clusterdata}"
+  name                 = "${var.storage_share}"
   resource_group_name  = "${var.deployment_rg_name}"
-  storage_account_name = "${azurerm_storage_account.storage.name}"
+  storage_account_name = "${var.storage_account == "" ? azurerm_storage_account.storage.name : var.storage_account}"
 }
 
 /*******************************************************************************************
@@ -24,9 +26,9 @@ data "template_file" "mount" {
   template = "${file("${path.module}/provisioning/mount.tpl")}"
 
   vars {
-    storage_account = "${azurerm_storage_account.storage.name}"  
-    storage_key     = "${azurerm_storage_account.storage.primary_access_key}"
-    storage_share   = "${var.storage_share_clusterdata}"
+    storage_account = "${var.storage_account == "" ? azurerm_storage_account.storage.name : var.storage_account}" 
+    storage_key     = "${var.storage_key == "" ? azurerm_storage_account.storage.primary_access_key : var.storage_key}"
+    storage_share   = "${var.storage_share}"
   }
 }
 
