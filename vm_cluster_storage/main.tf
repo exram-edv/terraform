@@ -32,7 +32,7 @@ data "template_file" "mount" {
 
 resource "local_file" "mount" {
     content  = "${data.template_file.mount.rendered}"
-    filename = "${path.cwd}/provisioning/mount.sh"
+    filename = "${path.cwd}/provisioning/.mount.sh"
 }
 
 /*******************************************************************************************
@@ -47,7 +47,7 @@ resource "null_resource" "cluster_storage" {
     }
 
     provisioner "file" {
-        source = "${path.cwd}/provisioning/mount.sh"
+        source = "${path.cwd}/provisioning/.mount.sh"
         destination = "/home/${var.os_admin_username}/mount.sh"
 
         connection {
