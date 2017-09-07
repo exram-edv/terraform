@@ -52,8 +52,3 @@ variable "storage_key" {
     description = "Key for accessing the storage account"
 }
 
-/*-----------------------------------------------------------------------------
-* intern
-*------------------------------------------------------------------------------*/
-variable "new_account" {}
-

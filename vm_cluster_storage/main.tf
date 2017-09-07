@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "storage" {
 resource "azurerm_storage_share" "clusterdata" {
   name                 = "${var.storage_share}"
   resource_group_name  = "${var.deployment_rg_name}"
-  storage_account_name = "${var.storage_account == "" ? "${azurerm_storage_account.storage.name}" : var.storage_account}"
+  storage_account_name = "${var.storage_account == "" ? azurerm_storage_account.storage.name : var.storage_account}"
 }
 
 /*******************************************************************************************
@@ -25,10 +25,9 @@ resource "azurerm_storage_share" "clusterdata" {
 data "template_file" "mount" {
   template = "${file("${path.module}/provisioning/mount.tpl")}"
 
-
   vars {
-    storage_account = "${var.storage_account == "" ? "${azurerm_storage_account.storage.name}" : var.storage_account}" 
-    storage_key     = "${var.storage_key == "" ? "${azurerm_storage_account.storage.primary_access_key}" : var.storage_key}"
+    storage_account = "${var.storage_account == "" ? azurerm_storage_account.storage.name : var.storage_account}" 
+    storage_key     = "${var.storage_key == "" ? azurerm_storage_account.storage.primary_access_key : var.storage_key}"
     storage_share   = "${var.storage_share}"
   }
 }
