@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# System aktualisieren
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
 # mounten einer Dateifreigabe eines Azure Storage Accounts auf den nodes
 #
 # Parameter:
